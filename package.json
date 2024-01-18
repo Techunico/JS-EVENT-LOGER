@@ -1,0 +1,13 @@
+{
+  "name": "js_event_logger",
+  "version": "1.0.0",
+  "description": "Evnt logger comapatable with nodejs",
+  "main": "index.js",
+  "repository": "https://github.com/Techunico/JS-EVENT-LOGER.git",
+  "author": "Praveen Kumar",
+  "license": "MIT",
+  "private": true,
+  "bin": {
+    "my-npx-command": "./index.js"
+  }
+}
