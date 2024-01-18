@@ -1,1 +1,3 @@
-console.log("hello from create config")
+echo "Hello from the test-npx script!"
+
+node "./createConfigFile.js"
