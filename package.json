@@ -8,6 +8,6 @@
   "license": "MIT",
   "private": true,
   "bin": {
-    "my-npx-command": "./core/createConfig.js"
+    "my-npx-command": "./core/createConfig.sh"
   }
 }
