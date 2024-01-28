@@ -1,6 +1,3 @@
-const args = process.argv.slice(2);
-
-console.log(args)
 export const config = {
     file: {
         filePath: "",
