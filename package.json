@@ -7,7 +7,12 @@
   "author": "Praveen Kumar",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "bin": {
     "my-npx-command": "./core/createConfig.sh"
+  },
+  "dependencies": {
+    "firebase": "^10.8.0",
+    "mongoose": "^8.1.3"
   }
 }
