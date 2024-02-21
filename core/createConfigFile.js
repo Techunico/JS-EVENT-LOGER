@@ -3,10 +3,25 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs'
 
-const args = process.argv.slice(2);
-let configs = config
-const rootDirectory = process.cwd();
-
+const args = process.argv.slice(2)
+let configs = ''
+args.map(arg => {
+    switch (arg) {
+        case 'file':
+            configs = config.file
+            break
+        case 'firebase':
+            configs = config.firebase
+            break
+        case 'mongodb':
+            configs = config.mongodb
+            break
+        default:
+            configs = config.file
+            break
+    }
+})
+const rootDirectory = process.cwd()
 
 const filePath = `${rootDirectory}/event_logger_config.json`;
 const fileContent = JSON.stringify(configs, null, 2);
