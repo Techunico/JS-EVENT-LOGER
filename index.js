@@ -1,10 +1,13 @@
+import { compareNestedStructures } from './functions/compare'
 
-// import path from 'path';
-// const configFilePath = path.resolve(__dirname, '../loggerConfig.js');
-// import { config } from configFilePath;
+export const recordEvent = async (data) => {
+    let oldData = data.oldData
+    let newData = data.newData
+    let action = data.action
+    let performedBy = data.performedBy
+    let module = data.module
+
+    const diffrence = compareNestedStructures(oldData, newData)
 
 
-// export const logger = async (evt, evtUser, evtTime) => {
-//     const logDestination = config.logDestination
-
-// }
+}
