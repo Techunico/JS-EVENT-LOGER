@@ -1,8 +1,9 @@
 import { compareNestedStructures } from './functions/compare.js'
 import path from 'path';
 import fs from 'fs'
+import { writeEventToFile, readEventLogs } from './helpers/file.js'
 
-const recordEvent = async () => {
+export const recordEvent = async () => {
     // let oldData = data.oldData
     // let newData = data.newData
     // let action = data.action
@@ -15,6 +16,9 @@ const recordEvent = async () => {
 
     switch (eventLoggerConfig.target) {
         case 'file':
+            writeEventToFile('this is test data 1')
+            const data = await readEventLogs()
+            console.log(data)
             break
         default:
             break

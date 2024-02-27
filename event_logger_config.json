@@ -1,4 +1,5 @@
 {
-  "target": "mongodb",
-  "connectionString": ""
+  "target": "file",
+  "filePath": "",
+  "fileNamePrefix": ""
 }
