@@ -31,8 +31,7 @@ export const writeEventToFile = async (eventData) => {
     }
 };
 
-
-export const readEventLogs = async () => {
+export const readEventLogs = async (startDate, endDate) => {
     try {
         const files = await fs.promises.readdir(eventLogsDirectory);
         const logs = {};
@@ -40,18 +39,26 @@ export const readEventLogs = async () => {
         for (const file of files) {
             const filePath = path.join(eventLogsDirectory, file);
             const stat = await fs.promises.stat(filePath);
+
             if (stat.isFile()) {
                 const datePart = file.split('_')[0]; // Extract date from file name
-                const fileContent = await fs.promises.readFile(filePath, 'utf-8');
-                const lines = fileContent.split('\n').filter(line => line.trim() !== '');
-                const logObject = {};
 
-                lines.forEach(line => {
-                    const [date, content] = line.split(':-').map(item => item.trim());
-                    logObject[date] = content;
-                });
+                // Parse the date from the file name
+                const fileDate = new Date(datePart);
 
-                logs[datePart] = logObject;
+                // Check if the file date falls within the specified range
+                if (fileDate >= startDate && fileDate <= endDate) {
+                    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+                    const lines = fileContent.split('\n').filter(line => line.trim() !== '');
+                    const logObject = {};
+
+                    lines.forEach(line => {
+                        const [date, content] = line.split(':-').map(item => item.trim());
+                        logObject[date] = content;
+                    });
+
+                    logs[datePart] = logObject;
+                }
             }
         }
 
