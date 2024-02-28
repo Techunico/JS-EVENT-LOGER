@@ -1,4 +1,4 @@
-import { compareNestedStructures } from './functions/compare.js'
+import { compareObjects } from './functions/compare.js'
 import path from 'path';
 import fs from 'fs'
 import { writeEventToFile, readEventLogs } from './helpers/file.js'
@@ -10,7 +10,7 @@ export const recordEvent = async (data) => {
     let performedBy = data.performedBy
     let module = data.module
 
-    const diffrence = compareNestedStructures(oldData, newData)
+    const diffrence = compareObjects(oldData, newData)
     // Call the function to load the configuration
     const eventLoggerConfig = await loadEventLoggerConfig();
     let result = {}
