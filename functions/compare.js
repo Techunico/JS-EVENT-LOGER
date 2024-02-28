@@ -1,4 +1,4 @@
-export const compareNestedStructures = (obj1, obj2, currentPath, differences) => {
+export const compareObjects = (obj1, obj2, currentPath = '', differences = {}) => {
     for (const key in obj1) {
         if (obj1.hasOwnProperty(key)) {
             const newPath = currentPath ? `${currentPath}.${key}` : key;
@@ -11,7 +11,7 @@ export const compareNestedStructures = (obj1, obj2, currentPath, differences) =>
                     };
                 }
             } else if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-                compareNestedStructures(obj1[key], obj2[key], newPath, differences);
+                compareObjects(obj1[key], obj2[key], newPath, differences);
             } else if (!obj2.hasOwnProperty(key)) {
                 differences[newPath] = {
                     obj1: obj1[key],
@@ -38,6 +38,19 @@ export const compareNestedStructures = (obj1, obj2, currentPath, differences) =>
             }
         }
     }
+
+    // Check for keys present in obj2 but not in obj1
+    for (const key in obj2) {
+        if (obj2.hasOwnProperty(key) && !obj1.hasOwnProperty(key)) {
+            const newPath = currentPath ? `${currentPath}.${key}` : key;
+            differences[newPath] = {
+                obj1: undefined,
+                obj2: obj2[key]
+            };
+        }
+    }
+
+    return differences;
 };
 
 const arraysAreEqual = (arr1, arr2) => {

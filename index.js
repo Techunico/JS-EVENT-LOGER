@@ -13,14 +13,17 @@ export const recordEvent = async (data) => {
     const diffrence = compareNestedStructures(oldData, newData)
     // Call the function to load the configuration
     const eventLoggerConfig = await loadEventLoggerConfig();
+    let result = {}
 
     switch (eventLoggerConfig.target) {
         case 'file':
-            writeEventToFile(JSON.stringify(diffrence))
+            result = writeEventToFile(JSON.stringify(diffrence))
             break
         default:
             break
     }
+
+    return result
 }
 
 export const readEvents = async (startDate, endDate) => {
