@@ -1,5 +1,5 @@
 {
-  "name": "techunico-js-event-logger",
+  "name": "@techunico/js-event-logger",
   "version": "1.0.1",
   "description": "Evnt logger comapatable with nodejs",
   "main": "index.js",
