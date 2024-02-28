@@ -21,13 +21,14 @@ export const writeEventToFile = async (eventData) => {
 
         if (fileExists) {
             await appendFileAsync(logPath, formattedData);
-            console.log('Content appended to the file successfully!');
+            return { success: true, message: 'Content appended to the file successfully!' };
         } else {
             await writeFileAsync(logPath, formattedData);
-            console.log('File created and content written successfully!');
+            return { success: true, message: 'File created and content written successfully!' };
         }
     } catch (err) {
         console.error('Error writing file:', err);
+        return { success: false, error: err.message }
     }
 };
 
@@ -41,9 +42,9 @@ export const readEventLogs = async (startDate, endDate) => {
             const stat = await fs.promises.stat(filePath);
 
             if (stat.isFile()) {
-                const datePart = file.split('_')[0]; // Extract date from file name
+                const datePart = file.split('_')[0];
 
-                // Parse the date from the file name
+                // 
                 const fileDate = new Date(datePart);
 
                 // Check if the file date falls within the specified range
@@ -62,10 +63,10 @@ export const readEventLogs = async (startDate, endDate) => {
             }
         }
 
-        return logs;
+        return { success: true, logs: logs };
     } catch (err) {
         console.error('Error reading event logs:', err);
-        return {};
+        return { success: false, error: err.message };
     }
 };
 
