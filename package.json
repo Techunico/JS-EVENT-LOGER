@@ -1,6 +1,6 @@
 {
   "name": "@techunico/js-event-logger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Evnt logger compatable with nodejs",
   "main": "index.js",
   "repository": "https://github.com/Techunico/JS-EVENT-LOGER.git",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "@techunico/js-event-logger init": "./core/createConfig.sh"
+    "js-event-logger-init": "./core/createConfig.sh"
   },
   "dependencies": {
     "firebase": "^10.8.0",
