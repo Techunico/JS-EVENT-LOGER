@@ -11,13 +11,15 @@ export const recordEvent = async (data) => {
     let module = data.module
 
     const diffrence = compareObjects(oldData, newData)
+
+    const logData = { diffrence, action, performedBy, module }
     // Call the function to load the configuration
     const eventLoggerConfig = await loadEventLoggerConfig();
     let result = {}
 
     switch (eventLoggerConfig.target) {
         case 'file':
-            result = writeEventToFile(JSON.stringify(diffrence))
+            result = writeEventToFile(JSON.stringify(logData))
             break
         default:
             break
@@ -43,5 +45,3 @@ const loadEventLoggerConfig = async () => {
         console.error('Error loading JSON file:', error);
     }
 }
-
-recordEvent()
