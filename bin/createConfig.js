@@ -1,4 +1,13 @@
-import { config } from './config.js'
+#!/usr/bin/env node
+"use strict";
+
+// // Import the functionality from './createConfigFile'
+// import createConfigFile from './createConfigFile.js';
+
+// // Export the imported functionality
+// export default createConfigFile;
+
+import { config } from '../core/config.js'
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs, { mkdir } from 'fs'
