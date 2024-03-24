@@ -14,7 +14,8 @@ export const writeEventToFile = async (eventData) => {
         const month = String(currentDate.getMonth() + 1).padStart(2, '0');
         const day = String(currentDate.getDate()).padStart(2, '0');
         const dateString = `${year}-${month}-${day}`;
-        const logPath = path.join(process.cwd(), `app/event_logs/${dateString}_event_log.txt`);
+        const targetDirectory = await checkAndReturnPath()
+        const logPath = path.join(targetDirectory, `${dateString}_event_log.txt`)
         const formattedData = `${currentDate.toISOString()}:- ${eventData}\n`;
 
         const fileExists = await existsAsync(logPath);
@@ -43,8 +44,6 @@ export const readEventLogs = async (startDate, endDate) => {
 
             if (stat.isFile()) {
                 const datePart = file.split('_')[0];
-
-                // 
                 const fileDate = new Date(datePart);
 
                 // Check if the file date falls within the specified range
@@ -70,3 +69,29 @@ export const readEventLogs = async (startDate, endDate) => {
     }
 };
 
+const checkAndReturnPath = async () => {
+    const filePath = path.join(process.cwd(), 'event_logger_config.json');
+
+    try {
+        const data = await fs.promises.readFile(filePath, 'utf-8');
+        const eventLoggerConfig = JSON.parse(data);
+        const targetPath = eventLoggerConfig.filePath || path.join(process.cwd(), 'event_logs');
+
+        try {
+            const exists = await fs.promises.access(targetPath, fs.constants.F_OK);
+            if (!exists) {
+                await fs.promises.mkdir(targetPath, { recursive: true });
+                console.log('Directory created successfully!');
+            } else {
+                console.log('Directory already exists.');
+            }
+            return targetPath;
+        } catch (err) {
+            console.error('Error creating or accessing directory:', err);
+            throw err;
+        }
+    } catch (error) {
+        console.error('Error loading JSON file:', error);
+        throw error;
+    }
+};
