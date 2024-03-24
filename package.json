@@ -1,6 +1,6 @@
 {
   "name": "@techunico/js-event-logger",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Evnt logger compatable with nodejs",
   "main": "index.js",
   "repository": "https://github.com/Techunico/JS-EVENT-LOGER.git",
