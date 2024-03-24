@@ -14,7 +14,7 @@ import fs, { mkdir } from 'fs'
 
 
 const rootDirectory = process.cwd()
-const eventLogsDirectory = path.join(rootDirectory, 'app', 'event_logs');
+// const eventLogsDirectory = path.join(rootDirectory, 'app', 'event_logs');
 const args = process.argv.slice(2)
 if (args == '') {
     console.log("please pass at lease one argument")
@@ -25,13 +25,13 @@ args.map(arg => {
     switch (arg) {
         case 'file':
             configs = config.file
-            fs.mkdir(eventLogsDirectory, { recursive: true }, (err) => {
-                if (err) {
-                    console.error('Error creating directory:', err);
-                } else {
-                    console.log('Event logs directory created successfully!');
-                }
-            });
+            // fs.mkdir(eventLogsDirectory, { recursive: true }, (err) => {
+            //     if (err) {
+            //         console.error('Error creating directory:', err);
+            //     } else {
+            //         console.log('Event logs directory created successfully!');
+            //     }
+            // });
             break
         case 'firebase':
             configs = config.firebase
